@@ -1,14 +1,22 @@
 export default function Home() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-100">
+    <main className="min-h-screen flex items-center justify-center bg-gray-300">
 
       <div className="bg-white p-8 rounded-3xl shadow-lg w-[350px]">
 
-        <h1 className="text-3xl font-bold text-center">
-          ⚡ SIAGA
-        </h1>
+        <div className="flex items-center justify-center gap-2">
+          <img
+            src="/logo_siaga_pluss.png"
+            alt="Logo"
+            className="w-8 h-8"
+          />
 
-        <p className="text-center text-gray-500 mt-2 mb-8">
+          <h1 className="text-3xl font-bold">
+            SIAGA PLUSS
+          </h1>
+        </div>
+
+        <p className="text-center text-gray-700 mt-8 mb-8">
           Selamat Datang
         </p>
 
