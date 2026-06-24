@@ -1,19 +1,58 @@
 export default function Home() {
   return (
-    <div className="bg-gray-500 h-screen flex items-center justify-center">
-        <h1 className="text-2xl flex items-center font-bold text-center mb-8">
+    <main className="min-h-screen flex items-center justify-center bg-gray-100">
+
+      <div className="bg-white p-8 rounded-3xl shadow-lg w-[350px]">
+
+        <h1 className="text-3xl font-bold text-center">
+          ⚡ SIAGA
+        </h1>
+
+        <p className="text-center text-gray-500 mt-2 mb-8">
+          Selamat Datang
+        </p>
+
+        <div className="flex flex-col gap-4">
+
+          <input
+            type="email"
+            placeholder="Email"
+            className="border rounded-xl p-3"
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="border rounded-xl p-3"
+          />
+
+          <button
+            className="bg-blue-500 text-white rounded-xl p-3"
+          >
             Login
-            </h1>
-    
-        <div className="bg-white w-80 p-6 rounded-2xl shadow-lg mb-4">
-            
+          </button>
+
+          <p className="text-center text-gray-400">
+            atau
+          </p>
+
+          <button
+            className="border rounded-xl p-3"
+          >
+            Masuk sebagai Tamu
+          </button>
+
+          <p className="text-center text-sm text-gray-500">
+            Belum punya akun?
+            <span className="ml-1 text-blue-500">
+              Daftar
+            </span>
+          </p>
+
         </div>
-      
-    </div>
+
+      </div>
+
+    </main>
   );
 }
-     
-     
-    
-    
-    
