@@ -1,7 +1,8 @@
 const items = [
-  { label: "Banjir", color: "bg-sky-500" },
-  { label: "Angin kencang", color: "bg-amber-400" },
-  { label: "Balikpapan", color: "bg-emerald-500" },
+  { label: "Titik Banjir", color: "bg-sky-500" },
+  { label: "Angin Kencang", color: "bg-amber-400" },
+  { label: "Genangan Jalan", color: "bg-emerald-500" },
+  { label: "Longsor", color: "bg-rose-500" },
 ];
 
 export default function MapLegend() {

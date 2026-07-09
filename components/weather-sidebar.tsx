@@ -1,7 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const menuItems = [
-  { label: "Dashboard", href: "/" },
+  { label: "Beranda", href: "/beranda" },
   { label: "Peta Cuaca", href: "/peta" },
   { label: "Peringatan", href: "/peringatan" },
   { label: "Laporan Warga", href: "/laporan" },
@@ -17,7 +18,7 @@ type WeatherSidebarProps = {
 };
 
 export default function WeatherSidebar({
-  activeItem = "Dashboard",
+  activeItem = "Beranda",
   location = "Balikpapan",
   status = "Aman dan terkendali",
   tip = "Siapkan payung bila keluar sore hari.",
@@ -26,9 +27,7 @@ export default function WeatherSidebar({
     <aside className="border-b border-lime-100 bg-white px-5 py-6 lg:border-b-0 lg:border-r lg:px-6 lg:py-8">
       <div className="flex h-full flex-col">
         <div>
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-100 text-lg font-bold text-lime-700">
-            SP
-          </div>
+          <Image src="/logosiaga.jpeg" alt="Logo Siaga+"width={55} height={55} className="rounded-xl object-cover"/>
           <h1 className="mt-4 text-xl font-semibold text-slate-900">Siaga Pluss</h1>
           <p className="mt-2 text-sm leading-6 text-slate-500">
             Dashboard cuaca untuk pemantauan cepat kondisi wilayah.
@@ -62,7 +61,7 @@ export default function WeatherSidebar({
               <p className="mt-1">Update 5 menit lalu</p>
             </div>
             <div className="rounded-2xl bg-white px-4 py-3 shadow-sm">
-              <p className="font-medium text-slate-900">Status area</p>
+              <p className="font-medium text-slate-900">Wilayah Terpantau</p>
               <p className="mt-1 text-lime-700">{status}</p>
             </div>
           </div>

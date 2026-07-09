@@ -65,21 +65,18 @@ function toneClasses(tone: AlertCard["tone"]) {
         panel: "border-rose-200 bg-rose-50 text-rose-800",
         badge: "bg-rose-100 text-rose-700",
         icon: "bg-rose-100 text-rose-700",
-        button: "border-rose-200 text-rose-700 hover:bg-rose-50",
       };
     case "normal":
       return {
         panel: "border-emerald-200 bg-emerald-50 text-emerald-800",
         badge: "bg-emerald-100 text-emerald-700",
         icon: "bg-emerald-100 text-emerald-700",
-        button: "border-emerald-200 text-emerald-700 hover:bg-emerald-50",
       };
     default:
       return {
         panel: "border-amber-200 bg-amber-50 text-amber-800",
         badge: "bg-amber-100 text-amber-700",
         icon: "bg-amber-100 text-amber-700",
-        button: "border-amber-200 text-amber-700 hover:bg-amber-50",
       };
   }
 }
@@ -119,13 +116,6 @@ export default function PeringatanPage() {
 
                     <h2 className="mt-4 text-xl font-semibold text-slate-900">{alert.title}</h2>
                     <p className="mt-2 text-sm leading-6 text-slate-600">{alert.description}</p>
-
-                    <button
-                      type="button"
-                      className={`mt-5 inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm font-medium transition-colors ${classes.button}`}
-                    >
-                      Lihat Detail
-                    </button>
                   </article>
                 );
               })}

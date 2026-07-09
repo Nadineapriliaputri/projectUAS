@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -31,9 +32,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Brand */}
         <div className="mb-8 text-center">
-          <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-100 text-xl font-bold text-lime-700">
-            SP
-          </div>
+          <Image src="/logosiaga.jpeg" alt="Logo Siaga+" width={100} height={100} className="mx-auto mb-4 rounded-3xl object-cover"/>
           <h1 className="mt-4 text-2xl font-semibold text-slate-900">
             Siaga Pluss
           </h1>
