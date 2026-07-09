@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import WeatherSidebar from "@/components/weather-sidebar";
-import { getReports, addReport } from "@/lib/reports-store";
+import { getReports, addReport, verifyReport } from "@/lib/reports-store";
 
 type ReportItem = {
   id: string;
@@ -162,6 +162,11 @@ export default function LaporanPage() {
     );
   }
 
+  function handleVerify(reportId: string) {
+    verifyReport(reportId);
+    setReportsList(getReports().map(toListItem));
+  }
+
   return (
     <main className="min-h-screen bg-[#edf4e3] p-3 text-slate-900 sm:p-4 lg:p-6">
       <div className="mx-auto grid min-h-[calc(100vh-1.5rem)] max-w-7xl overflow-hidden rounded-[32px] border border-lime-100 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.08)] lg:grid-cols-[280px_minmax(0,1fr)]">
@@ -200,6 +205,15 @@ export default function LaporanPage() {
                       >
                         Detail
                       </Link>
+                      {report.statusTone !== "emerald" && (
+                        <button
+                          type="button"
+                          onClick={() => handleVerify(report.id)}
+                          className="inline-flex items-center justify-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-700 transition-colors hover:bg-amber-100"
+                        >
+                          Verifikasi
+                        </button>
+                      )}
                     </div>
                   </article>
                 ))}

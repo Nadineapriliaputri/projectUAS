@@ -149,6 +149,14 @@ export function addComment(reportId: string, data: { name: string; text: string;
   return comment;
 }
 
+export function verifyReport(reportId: string): boolean {
+  const report = reports.find((r) => r.id === reportId);
+  if (!report) return false;
+  report.status = "Terverifikasi";
+  report.statusTone = "emerald";
+  return true;
+}
+
 export function addReport(data: {
   type: string;
   location: string;

@@ -233,6 +233,25 @@ export default function ProfilPage() {
                     Pengguna Aktif
                   </span>
                 </div>
+
+                <div className="mt-6 border-t border-lime-200 pt-5">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lime-700">
+                    Aktivitas Terakhir
+                  </p>
+                  <div className="mt-3 space-y-2">
+                    {activities.map((activity, index) => (
+                      <div
+                        key={activity}
+                        className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm"
+                      >
+                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-lime-100 text-xs font-semibold text-lime-700">
+                          {index + 1}
+                        </div>
+                        <p className="text-sm text-slate-700">{activity}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </article>
 
               <div className="space-y-4 rounded-[28px] bg-[#f5f9ef] p-6 shadow-sm">
@@ -262,26 +281,6 @@ export default function ProfilPage() {
                 </div>
               </div>
             </div>
-
-            <section className="mt-6 rounded-[28px] bg-[#f5f9ef] p-5 shadow-sm">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lime-700">
-                Aktivitas Terakhir
-              </p>
-
-              <div className="mt-4 space-y-3">
-                {activities.map((activity, index) => (
-                  <div
-                    key={activity}
-                    className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm"
-                  >
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-lime-100 text-sm font-semibold text-lime-700">
-                      {index + 1}
-                    </div>
-                    <p className="text-sm text-slate-700">{activity}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
           </section>
         </div>
       </div>
