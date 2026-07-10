@@ -29,7 +29,7 @@ function toListItem(r: { id: string; type: string; location: string; time: strin
 
 export default function LaporanPage() {
   const [description, setDescription] = useState("");
-  const [reportType, setReportType] = useState("Titik Banjir");
+  const [reportType, setReportType] = useState("Banjir");
   const [location, setLocation] = useState("");
   const [locationAddress, setLocationAddress] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -62,7 +62,7 @@ export default function LaporanPage() {
 
     setTimeout(() => {
       setDescription("");
-      setReportType("Titik Banjir");
+      setReportType("Banjir");
       setLocation("");
       setLocationAddress("");
       setPhoto(null);
@@ -201,7 +201,7 @@ export default function LaporanPage() {
             <div className="mt-6 grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
               <div className="space-y-4">
                 {reportsList.map((report) => (
-                  <article key={report.id} className="rounded-[28px] border border-slate-200 bg-[#f5f9ef] p-5 shadow-sm">
+                  <article id={`report-${report.id}`} key={report.id} className="rounded-[28px] border border-slate-200 bg-[#f5f9ef] p-5 shadow-sm scroll-mt-4">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div>
                         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-lime-700">
@@ -331,11 +331,10 @@ export default function LaporanPage() {
                       onChange={(event) => setReportType(event.target.value)}
                       className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-lime-400"
                     >
-                      <option>Titik Banjir</option>
-                      <option>Angin Kencang</option>
-                      <option>Genangan Jalan</option>
+                      <option>Banjir</option>
+                      <option>Pohon Tumbang</option>
                       <option>Longsor</option>
-                      <option>Lainnya</option>
+                      <option>Jalan Tergenang</option>
                     </select>
                   </label>
 

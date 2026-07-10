@@ -102,9 +102,7 @@ export default function LaporanDetailPage({ params }: DetailProps) {
   }
 
   const storedComments = getStoredComments(id);
-  const defaultReport = ["1", "2", "3"].includes(id)
-    ? getReportById(id)
-    : null;
+  const defaultReport = getReportById(id);
   const defaultCount = defaultReport?.comments.length ?? 0;
   const allComments = detail.comments;
 
