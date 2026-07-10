@@ -21,7 +21,7 @@ export default function StatistikPage() {
           Statistik
         </p>
         <h1 className="mt-2 text-3xl font-semibold text-slate-900">
-          Dashboard statistik Siaga+.
+          Dashboard statistik Siaga Pluss.
         </h1>
       </section>
 

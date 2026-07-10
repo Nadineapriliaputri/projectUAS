@@ -27,7 +27,7 @@ export default function AdminSidebar() {
           <Image src="/logosiaga.jpeg" alt="Logo Siaga+" width={55} height={55} className="rounded-xl object-cover" />
           <h1 className="mt-4 text-xl font-semibold text-slate-900">Siaga Pluss</h1>
           <p className="mt-2 text-sm leading-6 text-slate-500">
-            Panel administrator Siaga+.
+            Panel administrator Siaga Pluss
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function AdminSidebar() {
 
         <div className="mt-auto hidden rounded-[28px] bg-slate-900 p-5 text-white lg:block">
           <p className="text-sm text-slate-300">Panel Admin</p>
-          <p className="mt-2 text-lg font-semibold">Kelola Siaga+ dengan mudah</p>
+          <p className="mt-2 text-lg font-semibold">Kelola Siaga Pluss dengan mudah</p>
         </div>
 
         <div className="mt-4 rounded-2xl border border-lime-200 bg-white p-4 lg:hidden">
