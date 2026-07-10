@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import WeatherSidebar from "@/components/weather-sidebar";
-import { getReports } from "@/lib/reports-store";
+import { getSavedReports, toggleSaveReport } from "@/lib/reports-store";
 
 const menuItems = [
   {
@@ -132,12 +132,16 @@ export default function ProfilPage() {
   const [savedEmail, setSavedEmail] = useState("nadine@email.com");
   const [savedLocation, setSavedLocation] = useState("Balikpapan");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [savedReportsList, setSavedReportsList] = useState(() => getSavedReports());
   const photoInputRef = useRef<HTMLInputElement>(null);
 
   function handleMenuClick(action: string) {
     if (action === "logout") {
       router.push("/login");
       return;
+    }
+    if (action === "saved") {
+      setSavedReportsList(getSavedReports());
     }
     setActiveModal(action);
   }
@@ -174,6 +178,11 @@ export default function ProfilPage() {
   function handleOpenReport(id: string) {
     setActiveModal(null);
     router.push(`/laporan/${id}`);
+  }
+
+  function handleUnsaveReport(reportId: string) {
+    toggleSaveReport(reportId);
+    setSavedReportsList(getSavedReports());
   }
 
   const initials = profileName
@@ -369,21 +378,37 @@ export default function ProfilPage() {
 
               {activeModal === "saved" && (
                 <div className="space-y-3">
-                  {getReports().slice(0, 5).map((report) => (
-                    <div key={report.id} className="flex items-center justify-between rounded-2xl bg-[#f5f9ef] px-4 py-3">
-                      <div>
-                        <p className="text-sm font-medium text-slate-700">{report.type} — {report.location}</p>
-                        <p className="text-xs text-slate-500">{report.status} · {report.time}</p>
+                  {savedReportsList.length === 0 ? (
+                    <p className="py-4 text-center text-sm text-slate-500">Belum ada laporan tersimpan. Tekan tombol &quot;Simpan&quot; pada halaman Laporan.</p>
+                  ) : (
+                    savedReportsList.map((report) => (
+                      <div key={report.id} className="flex items-center justify-between rounded-2xl bg-[#f5f9ef] px-4 py-3">
+                        <div>
+                          <p className="text-sm font-medium text-slate-700">{report.type} — {report.location}</p>
+                          <p className="text-xs text-slate-500">{report.status} · {report.time}</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => handleOpenReport(report.id)}
+                            className="text-xs font-medium text-lime-600 hover:text-lime-700"
+                          >
+                            Buka
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleUnsaveReport(report.id)}
+                            className="text-xs font-medium text-slate-400 hover:text-red-500"
+                            title="Hapus dari simpanan"
+                          >
+                            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" stroke="currentColor" strokeWidth="0">
+                              <path d="M6 4h12a1 1 0 0 1 1 1v15l-7-4-7 4V5a1 1 0 0 1 1-1Z" />
+                            </svg>
+                          </button>
+                        </div>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => handleOpenReport(report.id)}
-                        className="text-xs font-medium text-lime-600 hover:text-lime-700"
-                      >
-                        Buka
-                      </button>
-                    </div>
-                  ))}
+                    ))
+                  )}
                 </div>
               )}
 
@@ -438,7 +463,7 @@ export default function ProfilPage() {
                     <p className="mt-1 text-sm text-slate-500">Versi 1.0.0</p>
                   </div>
                   <p className="text-sm text-slate-600">
-                    Siaga Pluss adalah aplikasi pemantauan cuaca dan pelaporan bencana untuk wilayah Balikpapan.
+                    Selamat datang di Siaga Pluss, platform pelaporan dan pemantauan bencana yang membantu masyarakat mendapatkan informasi dan mengirim laporan secara cepat dan mudah.
                   </p>
                   <p className="text-xs text-slate-500">Dikembangkan untuk UAS 2026</p>
                 </div>

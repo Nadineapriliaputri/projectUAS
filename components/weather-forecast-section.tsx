@@ -51,7 +51,7 @@ export default function ForecastSection({ items }: Props) {
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-lime-700">
             Perkiraan Cuaca
           </p>
-          <h2 className="mt-1 text-xl font-semibold text-slate-900">Prakiraan horizontal</h2>
+          <h2 className="mt-1 text-xl font-semibold text-slate-900">Ramalan aku nihh...</h2>
         </div>
         <p className="text-sm text-slate-500">12 jam ke depan</p>
       </div>

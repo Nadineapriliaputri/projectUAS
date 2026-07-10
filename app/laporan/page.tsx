@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import WeatherSidebar from "@/components/weather-sidebar";
-import { getReports, addReport, verifyReport } from "@/lib/reports-store";
+import { getReports, addReport, verifyReport, isReportSaved, toggleSaveReport } from "@/lib/reports-store";
 
 type ReportItem = {
   id: string;
@@ -39,6 +39,10 @@ export default function LaporanPage() {
   const [photo, setPhoto] = useState<string | null>(null);
   const [photoError, setPhotoError] = useState<string | null>(null);
   const [reportsList, setReportsList] = useState<ReportItem[]>(() => getReports().map(toListItem));
+  const [savedIds, setSavedIds] = useState<Set<string>>(() => {
+    const ids = getReports().filter((r) => isReportSaved(r.id)).map((r) => r.id);
+    return new Set(ids);
+  });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -167,6 +171,19 @@ export default function LaporanPage() {
     setReportsList(getReports().map(toListItem));
   }
 
+  function handleToggleSave(reportId: string) {
+    toggleSaveReport(reportId);
+    setSavedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(reportId)) {
+        next.delete(reportId);
+      } else {
+        next.add(reportId);
+      }
+      return next;
+    });
+  }
+
   return (
     <main className="min-h-screen bg-[#edf4e3] p-3 text-slate-900 sm:p-4 lg:p-6">
       <div className="mx-auto grid min-h-[calc(100vh-1.5rem)] max-w-7xl overflow-hidden rounded-[32px] border border-lime-100 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.08)] lg:grid-cols-[280px_minmax(0,1fr)]">
@@ -214,6 +231,21 @@ export default function LaporanPage() {
                           Verifikasi
                         </button>
                       )}
+                      <button
+                        type="button"
+                        onClick={() => handleToggleSave(report.id)}
+                        className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                          savedIds.has(report.id)
+                            ? "border border-lime-300 bg-lime-600 text-white hover:bg-lime-500"
+                            : "border border-slate-200 bg-white text-slate-600 hover:border-lime-200 hover:bg-lime-50 hover:text-lime-700"
+                        }`}
+                        title={savedIds.has(report.id) ? "Batal simpan" : "Simpan laporan"}
+                      >
+                        <svg viewBox="0 0 24 24" className="h-4 w-4" fill={savedIds.has(report.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 4h12a1 1 0 0 1 1 1v15l-7-4-7 4V5a1 1 0 0 1 1-1Z" />
+                        </svg>
+                        {savedIds.has(report.id) ? "Tersimpan" : "Simpan"}
+                      </button>
                     </div>
                   </article>
                 ))}

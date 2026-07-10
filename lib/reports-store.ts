@@ -21,6 +21,7 @@ export type ReportItem = {
 };
 
 const COMMENTS_KEY = "siaga_comments";
+const SAVED_REPORTS_KEY = "siaga_saved_reports";
 
 let nextId = 4;
 
@@ -195,4 +196,45 @@ export function addReport(data: {
 
   reports = [newReport, ...reports];
   return newReport;
+}
+
+function loadSavedIds(): string[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(SAVED_REPORTS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveSavedIds(ids: string[]) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(SAVED_REPORTS_KEY, JSON.stringify(ids));
+}
+
+export function getSavedReportIds(): string[] {
+  return loadSavedIds();
+}
+
+export function isReportSaved(reportId: string): boolean {
+  return loadSavedIds().includes(reportId);
+}
+
+export function toggleSaveReport(reportId: string): boolean {
+  const ids = loadSavedIds();
+  const index = ids.indexOf(reportId);
+  if (index > -1) {
+    ids.splice(index, 1);
+  } else {
+    ids.push(reportId);
+  }
+  saveSavedIds(ids);
+  return index === -1;
+}
+
+export function getSavedReports(): ReportItem[] {
+  mergeComments();
+  const savedIds = loadSavedIds();
+  return reports.filter((r) => savedIds.includes(r.id));
 }

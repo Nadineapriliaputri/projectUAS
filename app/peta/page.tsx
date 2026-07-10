@@ -2,18 +2,33 @@
 
 import dynamic from "next/dynamic";
 import WeatherSidebar from "@/components/weather-sidebar";
-import MapLegend from "@/components/ui/map-legend";
+import {
+  getLaporanStats,
+  type LaporanStats,
+} from "@/lib/laporan-data";
 
-const PetaMap = dynamic(() => import("@/components/peta-map"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex h-[520px] items-center justify-center rounded-[24px] border border-slate-200 bg-slate-50 text-sm text-slate-400">
-      Memuat peta...
-    </div>
-  ),
-});
+const PetaMapWithMarkers = dynamic(
+  () => import("@/components/peta-map-with-markers"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex h-[520px] items-center justify-center rounded-[24px] border border-slate-200 bg-slate-50 text-sm text-slate-400">
+        Memuat peta...
+      </div>
+    ),
+  }
+);
+
+const statCards: { label: string; key: keyof LaporanStats; color: string }[] =
+  [
+    { label: "Total Laporan", key: "total", color: "bg-slate-800" },
+    { label: "Banjir", key: "banjir", color: "bg-blue-500" },
+    { label: "Angin Kencang", key: "anginKencang", color: "bg-yellow-400" },
+  ];
 
 export default function PetaPage() {
+  const stats = getLaporanStats();
+
   return (
     <main className="min-h-screen bg-[#edf4e3] p-3 sm:p-4 lg:p-6">
       <div className="mx-auto grid min-h-[calc(100vh-1.5rem)] max-w-7xl overflow-hidden rounded-[32px] bg-white lg:grid-cols-[280px_minmax(0,1fr)]">
@@ -43,12 +58,28 @@ export default function PetaPage() {
               </p>
             </div>
 
-            <div className="overflow-hidden rounded-[24px] border border-slate-200">
-              <PetaMap />
+            {/* ringkasan laporan */}
+            <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {statCards.map((card) => (
+                <div
+                  key={card.key}
+                  className="flex items-center gap-3 rounded-2xl bg-[#f5f9ef] px-4 py-3"
+                >
+                  <span
+                    className={`h-2.5 w-2.5 shrink-0 rounded-full ${card.color}`}
+                  />
+                  <div>
+                    <p className="text-lg font-bold leading-tight text-slate-900">
+                      {stats[card.key]}
+                    </p>
+                    <p className="text-xs text-slate-500">{card.label}</p>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <div className="mt-5">
-              <MapLegend />
+            <div className="overflow-hidden rounded-[24px] border border-slate-200">
+              <PetaMapWithMarkers />
             </div>
 
           </section>

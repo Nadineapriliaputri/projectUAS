@@ -21,7 +21,7 @@ export default function WeatherSidebar({
   activeItem = "Beranda",
   location = "Balikpapan",
   status = "Aman dan terkendali",
-  tip = "Siapkan payung bila keluar sore hari.",
+  tip = "Jangan cuma siap ditinggal, siapin juga jas hujan..",
 }: WeatherSidebarProps) {
   return (
     <aside className="border-b border-lime-100 bg-white px-5 py-6 lg:border-b-0 lg:border-r lg:px-6 lg:py-8">
